@@ -3,11 +3,6 @@ require 'airborne'
 
 describe 'creating a poll' do
 
-  it 'should be configured correctly' do
-    get "/",  :format => 'json'
-    expect_status(200)
-  end 
-
   it 'should list the polls' do
     get '/api/v1/polls'
     expect_status(200)
