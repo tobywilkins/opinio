@@ -8,7 +8,14 @@ describe 'creating a poll' do
     expect_status(200)
   end 
 
-  # it "adds a poll to the list" do 
+  it 'should list the polls' do
+    get '/api/v1/polls'
+    expect_status(200)
+    expect(json_body.length == 0)
+  end 
+
+
+    #it "adds a poll to the list" do 
     
 
 
