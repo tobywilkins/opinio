@@ -4,9 +4,10 @@ module API
     format :json
   
     version 'v1', using: :path
-    before do
-      #error!("401 Unauthorized", 404) unless authenticated
-    end
+    # before do
+    #   puts env
+    #   error!("401 Unauthorized", 401) unless authenticated
+    # end
 
     helpers do
       def warden
@@ -18,8 +19,20 @@ module API
       end
 
       def authenticated
-        return true if warden.authenticated?
-        params[:access_token] && @user = User.find_by_authentication_token(params[:access_token])
+        t = params[:auth_token]
+        puts "authenticating ....with token #{t.to_s}"
+
+        if warden.authenticated?
+          return true
+        end
+                
+        if t
+          puts "have token"
+
+          found_user =  @user = User.find_by_authentication_token(t)
+          puts "found : #{found_user}"
+          return found_user 
+        end 
       end
 
       def current_user

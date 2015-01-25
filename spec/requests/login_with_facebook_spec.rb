@@ -15,5 +15,12 @@ RSpec.describe "logging in with facebook token", :type => :request do
     expect(JSON.parse(response.body)).to be_has_key("authentication_token")
 
   end
+
+  it "Should permit access to poll with a token" do
+  
+    get "/api/v1/polls"
+    expect(response).to have_http_status(401)
+ 
+  end 
 end
  

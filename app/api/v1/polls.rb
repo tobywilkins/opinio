@@ -2,6 +2,10 @@
     class Polls < Grape::API
       version 'v1', using: :path
       format :json
+    
+      before do
+       error!("401 Unauthorized", 401) unless authenticated
+     end
 
       helpers do
         def declared_params
@@ -19,7 +23,6 @@
         params do
           requires :title, type: String
           requires :caption_a, type: String
-          requires :caption_b, type: String
           requires :caption_b, type: String
           # for binary file you can omit type 
           requires :image_a
@@ -40,6 +43,17 @@
           @poll.to_json
           puts "#{declared_params} to #{params[:id]} in votes"
         end
-      end
+        
+        desc "Returns pong if logged in correctly"
+        params do
+          requires :auth_token, type: String, desc: "Access token."
+        end
+
+        get 'ping' do
+          { message: "pong", current_user: current_user}
+        end 
+
+
+      end # resource 
     end
   end

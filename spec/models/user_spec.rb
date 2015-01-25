@@ -2,6 +2,30 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
 
+  it "creates a user given parameters" do
+    user = User.new({
+      email:"joe@example.com",
+      password: "testtest",
+      password_confirmation: "testtest",
+      name: "joe"
+    })
+
+    expect(user.save).to eq(true)
+    expect(user.email).to eq("joe@example.com")
+    expect(user.name).to eq("joe")
+    
+    puts user.inspect
+    # set token manually
+    user.authentication_token = 'xxxx'
+
+    expect(user.save).to eq(true)
+    expect(user.email).to eq("joe@example.com")
+    expect(user.name).to eq("joe")
+    expect(user.authentication_token).to eq("xxxx")
+
+    expect(User.find_by_authentication_token("xxxx").email).to eq("joe@example.com")
+  end 
+
   it "creates a user using FB details" do
  
     class Fb

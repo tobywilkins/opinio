@@ -2,18 +2,14 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
-
-
-
-#  attr_accessible :name, :email, :authentication_token
+         :recoverable, :rememberable, :trackable, :validatable #, :confirmable
 
   before_save :ensure_authentication_token
+
 
   def ensure_authentication_token
     self.authentication_token ||= generate_authentication_token
   end
-
 
   def self.create_with_facebook(fbhash)
  

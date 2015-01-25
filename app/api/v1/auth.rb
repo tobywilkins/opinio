@@ -27,7 +27,7 @@ module V1
       end
       get :ping do
         authenticate!
-        { message: "pong" }
+        { message: "pong", current_user: current_user}
       end
     end   
 
