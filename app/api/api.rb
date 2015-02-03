@@ -3,6 +3,16 @@ module API
     prefix 'api'
     format :json
   
+    rescue_from :all 
+    
+    #do |e|
+      # Rack::Response.new({
+      # error_code: 500,
+      # error_message: e.message
+      # }.to_json, 500).finish
+    # end
+
+
     version 'v1', using: :path
     # before do
     #   puts env
@@ -39,6 +49,9 @@ module API
         warden.user || @user
       end
     end
+
+
+   
 
     # mount the api last  
     mount ::V1::Root 

@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'carrierwave'
 gem 'grape'
+gem 'grape-entity'
 gem "hashie_rails"
 
 gem "koala", "~> 1.11.0rc"

@@ -2,9 +2,15 @@
 
 FactoryGirl.define do
   factory :user do
-    name 'joe'
-    email 'joe@example.com'
-    authentication_token 'token'
+    sequence :name do |n|
+      "User#{n}"
+    end 
+    sequence :email do |n|
+      "user#{n}@example.com"
+    end 
+    sequence :authentication_token do |n|
+      "token#{n}"
+    end 
     password 'password'
     password_confirmation 'password'
   end

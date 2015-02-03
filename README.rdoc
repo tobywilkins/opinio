@@ -16,19 +16,8 @@ curl http://localhost:3000/api/v1/polls?auth_token=bryxUHsG1UNydoo655Dz
 
 Create a poll: 
 
-curl -X POST -d '{"auth_token:"}' http://localhost:3000/api/v1/polls -H Content-Type:application/json -v
+curl -i -X POST -F caption_a="thailand" -F caption_b="India" -F title="where should I go" -F auth_token=bryxUHsG1UNydoo655Dz -F image_a=@spec/photos/beach.jpg -F image_b=@spec/photos/mountains.jpg  http://localhost:3000/api/v1/polls
 
-
-curl -i \
-  -X POST \
-  -F caption_a="thailand" \
-  -F caption_b="India"  \
-  -F title="where should I go" \
-  -F auth_token=bryxUHsG1UNydoo655Dz \
-  -F image_a=@spec/photos/beach.jpg \
-  -F image_b=@spec/photos/mountains.jpg \
-  -H Content-Type:application/json -v
-  http://localhost:3000/api/v1/polls \
 
 
 

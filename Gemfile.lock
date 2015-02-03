@@ -97,6 +97,9 @@ GEM
       rack-accept
       rack-mount
       virtus (>= 1.0.0)
+    grape-entity (0.4.4)
+      activesupport
+      multi_json (>= 1.3.2)
     hashie (3.3.2)
     hashie_rails (0.0.1)
       hashie (>= 3.0)
@@ -229,6 +232,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   grape
+  grape-entity
   hashie_rails
   jbuilder (~> 2.0)
   koala (~> 1.11.0rc)

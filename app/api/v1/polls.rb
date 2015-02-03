@@ -1,4 +1,18 @@
   module V1
+    
+    # module Entities
+    #   class Poll < Grape::Entity
+
+    #     expose :id, documentation: { type: "String", desc: "ID." }
+    #     expose :title, documentation: { type: "String", desc: "The Title of the poll" } 
+    #     expose :caption_a, documentation: { type: "String", desc: "Caption for option A." }
+    #     expose :caption_b, documentation: { type: "String", desc: "Caption for  option B" }
+    #     expose :image_a, documentation: {  desc: "The image for option A." }
+    #     expose :image_b, documentation: {  desc: "The image for option B." }
+    #   end  
+    # end 
+
+
     class Polls < Grape::API
       version 'v1', using: :path
       format :json
@@ -15,23 +29,20 @@
 
       resource :polls do
        
-        desc "Return list of recent posts"
+        desc "Return list of recent polls"
         get do
           Poll.all
         end
 
-        params do
-          requires :title, type: String
-          requires :caption_a, type: String
-          requires :caption_b, type: String
-          # for binary file you can omit type 
-          requires :image_a
-          requires :image_b
+        desc "Create a new poll" 
+        # do
+        #   params do
+        #     #requires :all, using: API::Entities::Poll.documentation.except(:id)
+        #   end
+        # end 
 
-        end
-        
         post do 
-          Poll.create!(declared_params)
+          @poll = Poll.create(declared_params)
         end 
 
         params do
