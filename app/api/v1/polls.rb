@@ -50,7 +50,11 @@
         end 
         post ':id/vote' do
           @poll = Poll.find(params[:id])
-          CastVote.new.call(@poll,params[:which],nil)
+          CastVote.new.call({
+              poll: @poll, 
+              vote: params[:which], 
+              user:nil
+          })
           @poll.to_json
           puts "#{declared_params} to #{params[:id]} in votes"
         end

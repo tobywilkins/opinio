@@ -5,9 +5,10 @@ describe 'creating a poll' do
   it 'can ping pong' do
   @user = FactoryGirl.create(:user, email:"abc@example.com")
     @user.reload
+    tok = @user.authentication_token
     expect(@user.email).to eq("abc@example.com")
-    expect(@user.authentication_token).to eq("token")
-    expect(User.find_by_authentication_token("token")).to eq(@user)
+    expect(@user.authentication_token).to eq(tok)
+    expect(User.find_by_authentication_token(tok)).to eq(@user)
     get "/api/v1/polls/ping?auth_token=#{@user.authentication_token}"
 
     expect(response).to be_success
@@ -19,9 +20,10 @@ describe 'creating a poll' do
   it 'should list the polls' do
     @user = FactoryGirl.create(:user, email:"abc@example.com")
     @user.reload
+    tok = @user.authentication_token
     expect(@user.email).to eq("abc@example.com")
-    expect(@user.authentication_token).to eq("token")
-    expect(User.find_by_authentication_token("token")).to eq(@user)
+    expect(@user.authentication_token).to eq(tok)
+    expect(User.find_by_authentication_token(tok)).to eq(@user)
     get "/api/v1/polls?auth_token=#{@user.authentication_token}"
     expect(response).to be_success
     expect(response).to have_http_status(200)

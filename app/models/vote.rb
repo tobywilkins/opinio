@@ -13,7 +13,10 @@ class Vote < ActiveRecord::Base
   validates :option,  uniqueness: {  :scope => [:poll_id, :user_id] }
 
   before_validation :update_option
-  
+ 
+  scope :picked_a, -> { where(option: 0)}
+  scope :picked_b, -> { where(option: 1)}
+
   def self.cast(user,poll,choice)
     v = where(user: user, poll: poll).first
     if v.nil?
@@ -21,11 +24,10 @@ class Vote < ActiveRecord::Base
       v.user = user 
       v.poll = poll
       v.choice = choice
-      v.save 
     else
       v.choice = choice 
-      v.save
     end
+    v.save
     return v
   end 
 

@@ -1,13 +1,8 @@
 class CastVote
-
-  def call(poll, vote, user)
-    @poll = poll 
-
-    @vote = @poll.votes.build
-
-    o = 0 if vote == "a" || vote == "A"
-    @vote.option = vote
-    @vote.save
+  def call(opts)
+    poll = opts[:poll]
+    vote = opts[:vote]
+    user = opts[:user]
+    Vote.cast(user,poll,vote) 
   end 
-
 end 

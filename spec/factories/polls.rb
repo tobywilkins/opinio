@@ -8,6 +8,7 @@ FactoryGirl.define do
     caption_b "The Mountains"
     option_a_count 0
     option_b_count 0
+    user 
   end
 
 end
