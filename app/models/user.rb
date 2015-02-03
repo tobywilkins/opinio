@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
-  has_many :polls
+  has_many :polls, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
     
   def ensure_authentication_token
