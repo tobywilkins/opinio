@@ -40,6 +40,7 @@ RSpec.describe Vote, :type => :model do
     user = create(:user)
     poll = create(:poll)
     v = Vote.cast(user,poll,"A")
+    v.save
     expect(v.option).to eq(0) 
     expect(v.a?).to eq(true) 
    end 
@@ -49,10 +50,12 @@ RSpec.describe Vote, :type => :model do
     user = create(:user)
     poll = create(:poll)
     v = Vote.cast(user,poll,"A")
+    v.save
     expect(v.option).to eq(0) 
     expect(v.a?).to eq(true) 
     id = v.id
     v2 = Vote.cast(user,poll,"B")
+    v2.save
     expect(v2.id).to eq(id)
 
   end

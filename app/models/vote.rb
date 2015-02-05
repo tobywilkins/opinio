@@ -27,7 +27,6 @@ class Vote < ActiveRecord::Base
     else
       v.choice = choice 
     end
-    v.save
     return v
   end 
 

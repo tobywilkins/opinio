@@ -4,5 +4,6 @@
       
       mount ::V1::Polls
       mount ::V1::Auth
+      mount ::V1::Users
     end
   end

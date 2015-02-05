@@ -3,6 +3,11 @@ class CastVote
     poll = opts[:poll]
     vote = opts[:vote]
     user = opts[:user]
-    Vote.cast(user,poll,vote) 
+    vote =  Vote.cast(user,poll,vote) 
+    if vote.save
+      return { message: "success", vote: { id: vote.id , user: vote.user }}
+    else
+      return { message: "failure", error: vote.errors }
+    end 
   end 
 end 

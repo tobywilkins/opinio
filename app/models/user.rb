@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :polls, dependent: :destroy
   has_many :votes, dependent: :destroy
 
+
+  mount_uploader :profile_picture, ProfilePictureUploader
     
   def ensure_authentication_token
     self.authentication_token ||= generate_authentication_token
@@ -34,6 +36,21 @@ class User < ActiveRecord::Base
   def self.find_by_provider_uid(provider,uid)
     where(provider: provider, uid: uid ).take    
   end 
+
+
+  def number_of_polls
+    10
+  end 
+
+  def given_votes
+    123
+  end 
+
+  def gotten_votes
+    567
+  end 
+
+
 
   private
 
