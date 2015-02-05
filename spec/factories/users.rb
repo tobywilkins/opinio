@@ -13,6 +13,6 @@ FactoryGirl.define do
     end 
     password 'password'
     password_confirmation 'password'
-  end
-  
+    profile_picture File.open(File.join(Rails.root, '/spec/profile_pictures/gran.jpg'))
+  end 
 end

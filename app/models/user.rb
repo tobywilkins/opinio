@@ -39,18 +39,20 @@ class User < ActiveRecord::Base
 
 
   def number_of_polls
-    10
+    polls.count
   end 
 
   def given_votes
-    123
+    votes.count
   end 
 
   def gotten_votes
-    567
+    count = 0
+    polls.each do |p|
+      count = count + p.votes.count
+    end 
+    count
   end 
-
-
 
   private
 
@@ -60,8 +62,5 @@ class User < ActiveRecord::Base
       break token unless User.where(authentication_token: token).first
     end
   end
-
-
-
 
 end
