@@ -8,6 +8,9 @@ class Poll < ActiveRecord::Base
   has_many :votes
   belongs_to :user
 
+  has_many :a_voters, -> { where(option: 0) }, class_name: "Vote" 
+  has_many :b_voters, -> { where(option: 1) }, class_name: "Vote" 
+
   def owner
     user
   end 
@@ -18,13 +21,13 @@ class Poll < ActiveRecord::Base
   end 
 
   # returns the users that picked option A
-  def choose_a
-    votes.select { |v| v.option == 0 }.collect(&:user)
+  def voted_a
+    votes.select { |v| v.option == 0 }.collect(&:voter)
   end 
 
   # returns the users that picked option A
-  def choose_b
-    votes.select { |v| v.option == 1 }.collect(&:user)
+  def voted_b
+    votes.select { |v| v.option == 1 }.collect(&:voter)
   end 
 
   def winner 

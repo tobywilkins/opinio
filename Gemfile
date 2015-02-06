@@ -27,9 +27,15 @@ gem 'carrierwave'
 gem 'grape'
 gem 'grape-entity'
 gem "hashie_rails"
+gem 'grape-active_model_serializers'
 
 gem "koala", "~> 1.11.0rc"
 gem "devise"
+
+gem 'activeadmin', github: 'activeadmin'
+gem "fog"
+gem 'rails_12factor', group: :production
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

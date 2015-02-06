@@ -5,23 +5,23 @@ class Vote < ActiveRecord::Base
   A_OPTIONS = [0, "a", "A"]
   B_OPTIONS = [1, "b", "B"]
  
-  belongs_to :user
+  belongs_to :voter, class_name: "User", foreign_key: "user_id"
   belongs_to :poll
 
   validates :option, presence: true, inclusion: { in: [0, 1]  }
-  validates :user, :poll, presence: true
-  validates :option,  uniqueness: {  :scope => [:poll_id, :user_id] }
+  validates :voter, :poll, presence: true
+  #validates :option,  uniqueness: {  :scope => [:poll_id, :user_id] }
 
   before_validation :update_option
  
   scope :picked_a, -> { where(option: 0)}
   scope :picked_b, -> { where(option: 1)}
 
-  def self.cast(user,poll,choice)
-    v = where(user: user, poll: poll).first
+  def self.cast(voter,poll,choice)
+    v = where(voter: voter, poll: poll).first
     if v.nil?
       v = Vote.new
-      v.user = user 
+      v.voter = voter
       v.poll = poll
       v.choice = choice
     else

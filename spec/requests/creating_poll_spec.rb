@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'creating a poll' do
 
   it 'can ping pong' do
-  @user = FactoryGirl.create(:user, email:"abc@example.com")
+    @user = FactoryGirl.create(:user, email:"abc@example.com")
     @user.reload
     tok = @user.authentication_token
     expect(@user.email).to eq("abc@example.com")

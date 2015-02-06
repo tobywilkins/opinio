@@ -34,6 +34,13 @@
           Poll.all
         end
 
+
+
+        desc "Get the info for a poll"
+        get ":id" do
+          Poll.find(params[:id])
+        end 
+
         desc "Create a new poll" 
         # do
         #   params do

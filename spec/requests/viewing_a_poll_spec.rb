@@ -18,7 +18,7 @@ describe "viewing a poll" do
     user1.polls.create(attributes_for(:poll))
     poll = user1.polls.first 
 
-    expect(poll.title).to eq("Where should I go on holiday?") 
+    expect(poll.title).to eq("poll 1") 
     expect(poll.owner).to eq(user1)
 
     CastVote.new.call({ poll: poll, vote: "A", user: user2})
@@ -28,8 +28,18 @@ describe "viewing a poll" do
     puts poll.votes.inspect 
 
     expect(poll.winner).to eq("A") 
+    
+    @user = FactoryGirl.create(:user, email:"abc@example.com")
+    @user.reload
+    tok = @user.authentication_token
+    
 
+    get "/v1/polls/#{poll.id}?auth_token=#{tok}"
+    expect(response).to be_success
+    expect(response).to have_http_status(200)
+    expect(response.body).to eq("xxx")
   end 
+ 
   
 
 
